@@ -10,6 +10,26 @@
   <name>real</name>
   <url>http://maven.apache.org</url>
 
+  <profiles>
+    <profile>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <id>all</id>
+      <properties>
+        <testingGroup></testingGroup>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>example</id>
+      <properties>
+        <testingGroup>cnu.lecture.tdd2.ExampleCategoryTest</testingGroup>
+      </properties>
+    </profile>
+  </profiles>
+
   <build>
     <resources>
       <resource>
@@ -40,6 +60,18 @@
             <goals>
               <goal>prepare-agent</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19.1</version>
+        <configuration>
+          <groups>${testingGroup}</groups>
+        </configuration>
+        <executions>
+          <execution>
+            <id>example-category</id>
           </execution>
         </executions>
       </plugin>
